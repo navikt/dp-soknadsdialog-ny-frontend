@@ -6,6 +6,6 @@ import tsconfigPaths from "vite-tsconfig-paths";
 installGlobals();
 
 export default defineConfig({
-  base: "/arbeid/dagpenger/soknadsdialog-ny-frontend",
-  plugins: [remix({ basename: "/arbeid/dagpenger/soknadsdialog-ny-frontend" }), tsconfigPaths()],
+  base: "/arbeid/dagpenger/soknadsdialog-ny-frontend/",
+  plugins: [remix({ basename: "/arbeid/dagpenger/soknadsdialog-ny-frontend/" }), tsconfigPaths()],
 });
