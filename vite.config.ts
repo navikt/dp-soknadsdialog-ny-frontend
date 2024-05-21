@@ -8,7 +8,4 @@ installGlobals();
 export default defineConfig({
   base: "/arbeid/dagpenger/soknadsdialog-ny-frontend",
   plugins: [remix({ basename: "/arbeid/dagpenger/soknadsdialog-ny-frontend" }), tsconfigPaths()],
-  build: {
-    cssCodeSplit: false,
-  },
 });

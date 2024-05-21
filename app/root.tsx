@@ -23,8 +23,8 @@ import { ISanity } from "./sanity/sanity.types";
 export const sanityClient = createClient(sanityConfig);
 
 export const links: LinksFunction = () => [
-  { rel: "stylesheet", href: navStyles },
   { rel: "stylesheet", href: indexStyle },
+  { rel: "stylesheet", href: navStyles },
   {
     rel: "icon",
     type: "image/png",
