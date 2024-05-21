@@ -1,0 +1,42 @@
+:root {
+  --app-max-width: 900px;
+}
+
+.dp-soknadsdialog-ny-frontend {
+  border: 1px solid red;
+  margin-bottom: var(--a-spacing-16);
+}
+
+.page-header {
+  margin-bottom: var(--a-spacing-6);
+}
+
+.modal-container {
+  width: 100%;
+  max-width: var(--app-max-width);
+  padding: var(--a-spacing-2);
+}
+
+.modal-container--error {
+  background-color: var(--a-orange-50);
+  box-shadow: 0 0 0 1px var(--a-orange-600);
+}
+
+.modal-container--error:focus {
+  box-shadow: 0 0 0 3px var(--a-orange-600);
+}
+
+.navigation-container {
+  display: flex;
+  flex-wrap: wrap;
+  margin-top: 20px;
+  gap: 10px;
+}
+
+.no-padding-portabletext :first-child {
+  margin-top: 0;
+}
+
+.no-padding-portabletext :last-child {
+  margin-bottom: 0;
+}
