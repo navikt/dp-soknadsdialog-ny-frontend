@@ -1,4 +1,4 @@
-FROM node:v20.13.1-alpine
+FROM node:22.2.0-alpine
 
 COPY build/ build/
 COPY ./package.json ./
