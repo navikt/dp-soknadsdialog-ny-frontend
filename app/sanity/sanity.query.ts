@@ -3,32 +3,20 @@ const appTextsFields = `{
   valueText
 }`;
 
-const infoTextsFields = `{
+const infoPageFields = `{
   "slug": slug.current,
   body
 }`;
 
-const linkFields = `{
-  linkId,
-  linkText,
-  linkUrl,
-  linkDescription
-}`;
-
-export const appTextsGroq = `* [_type=="mineDagpengerAppText" && __i18n_lang==$baseLang]{
-    ...coalesce(* [_id==^._id + "__i18n_" + $lang][0]${appTextsFields}, ${appTextsFields})
+const appTextsGroq = `* [_type=="apptekst" && __i18n_lang==$baseLang]{
+  ...coalesce(* [_id==^._id + "__i18n_" + $lang][0]${appTextsFields}, ${appTextsFields})
   }`;
 
-const infoTextsGroq = `* [_type=="mineDagpengerRichText"  && __i18n_lang==$baseLang]{
-  ...coalesce(* [_id==^._id + "__i18n_" + $lang][0]${infoTextsFields}, ${infoTextsFields})
-  }`;
-
-const linksGroq = `* [_type=="mineDagpengerLink"  && __i18n_lang==$baseLang]{
-  ...coalesce(* [_id==^._id + "__i18n_" + $lang][0]${linkFields}, ${linkFields})
+const infoPageTextGroq = `* [_type=="infopage"  && __i18n_lang==$baseLang]{
+  ...coalesce(* [_id==^._id + "__i18n_" + $lang][0]${infoPageFields}, ${infoPageFields})
   }`;
 
 export const allTextsQuery = `{
   "appTexts": ${appTextsGroq},
-  "richTexts": ${infoTextsGroq},
-  "links": ${linksGroq}
+  "infoPage": ${infoPageTextGroq}
 }`;

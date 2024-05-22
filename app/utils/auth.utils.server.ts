@@ -1,30 +1,12 @@
 import { getToken, requestOboToken, validateToken } from "@navikt/oasis";
 import { getEnv } from "./env.utils";
 
-export async function getDPInnsynOboToken(request: Request) {
+export async function getDPSoknadOrkestratorOboToken(request: Request) {
   if (getEnv("IS_LOCALHOST") === "true") {
-    return getEnv("DP_INNSYN_TOKEN") || "";
+    return getEnv("DP_SOKNAD_ORKESTRATOR_TOKEN") || "";
   }
 
-  const audience = `${getEnv("NAIS_CLUSTER_NAME")}:teamdagpenger:dp-innsyn`;
-  return await getOnBehalfOfToken(request, audience);
-}
-
-export async function getPAWArbeidssokerregistreringOboToken(request: Request) {
-  if (getEnv("IS_LOCALHOST") === "true") {
-    return getEnv("PAW_ARBEIDSSOEKERREGISTERET_TOKEN") || "";
-  }
-
-  const audience = `${getEnv("NAIS_CLUSTER_NAME")}:paw:paw-arbeidssoekerregisteret-api-oppslag`;
-  return await getOnBehalfOfToken(request, audience);
-}
-
-export async function getOKONOMIKontoregisterToken(request: Request) {
-  if (getEnv("IS_LOCALHOST") === "true") {
-    return getEnv("OKONOMI_KONTOREGISTER_TOKEN") || "";
-  }
-
-  const audience = `${getEnv("NAIS_CLUSTER_NAME")}:okonomi:sokos-kontoregister-person`;
+  const audience = `${getEnv("NAIS_CLUSTER_NAME")}:teamdagpenger:dp-soknad-orkestrator`;
   return await getOnBehalfOfToken(request, audience);
 }
 

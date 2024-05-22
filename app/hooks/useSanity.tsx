@@ -1,5 +1,10 @@
 import { TypedObject } from "@portabletext/types";
-import { ISanityAppText, ISanityLink, ISanityRichText } from "~/sanity/sanity.types";
+import {
+  ISanityAppText,
+  ISanityInfoside,
+  ISanityLink,
+  ISanityRichText,
+} from "~/sanity/sanity.types";
 import { useTypedRouteLoaderData } from "./useTypedRouteLoaderData";
 
 export function useSanity() {
@@ -20,6 +25,12 @@ export function useSanity() {
     return richText?.body as TypedObject | TypedObject[];
   }
 
+  function getInfoPageText(slug: string): ISanityInfoside | undefined {
+    return sanityTexts?.infoPage.find((side) => {
+      return side.slug === slug;
+    });
+  }
+
   function getLink(linkId: string): ISanityLink {
     const link = sanityTexts?.links?.find((link) => link.linkId === linkId) || {
       linkId: linkId,
@@ -35,5 +46,6 @@ export function useSanity() {
     getAppText,
     getRichText,
     getLink,
+    getInfoPageText,
   };
 }

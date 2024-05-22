@@ -7,5 +7,5 @@ loginservice:
   url: https://loginservice.dev.nav.no/login
 soknadsdialog:
   ingress: https://arbeid.intern.dev.nav.no/dagpenger/dialog
-pawArbeidssoekerregisteretUrl: https://oppslag-arbeidssoekerregisteret.intern.dev.nav.no
-okonomiKontoregisterUrl: https://sokos-kontoregister-person.intern.dev.nav.no
+soknadOrkestrator: 
+  ingress: https://dp-soknad-orkestrator.intern.dev.nav.no

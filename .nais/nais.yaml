@@ -44,6 +44,8 @@ spec:
       value: {{ dekorator.url }}
     - name: DEKORATOR_ENV
       value: {{ dekorator.env }}
+    - name: DP_SOKNAD_ORKESTRATOR_URL
+      value: {{ soknadOrkestrator.ingress }}
   ingresses:
     - {{ ingress }}
   accessPolicy:
@@ -52,6 +54,7 @@ spec:
         - host: rt6o382n.apicdn.sanity.io
         - host: www.nav.no
         - host: dekoratoren.dev.nav.no
+        - host: dekoratoren.dev.
   idporten:
     enabled: true
     sidecar:

@@ -22,6 +22,7 @@
   "dependencies": {
     "@navikt/aksel-icons": "^6.6.1",
     "@navikt/ds-css": "^6.6.1",
+    "@navikt/ds-icons": "^3.4.3",
     "@navikt/ds-react": "^6.6.1",
     "@navikt/nav-dekoratoren-moduler": "^2.1.6",
     "@navikt/oasis": "^3.2.4",
