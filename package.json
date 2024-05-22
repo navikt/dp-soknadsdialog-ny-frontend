@@ -75,10 +75,5 @@
       "bash -c tsc",
       "bash -c 'npm run lint'"
     ]
-  },
-  "overrides": {
-    "vite": {
-      "rollup": "npm:@rollup/wasm-node"
-    }
   }
 }
