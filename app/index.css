@@ -39,3 +39,7 @@
 .no-padding-portabletext :last-child {
   margin-bottom: 0;
 }
+
+.mb-10 {
+  margin-bottom: var(--a-spacing-10);
+}

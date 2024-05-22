@@ -8,6 +8,7 @@ interface IEnv {
   USE_MSW: string;
   NAIS_CLUSTER_NAME: string;
   IS_LOCALHOST: string;
+  SANITY_DATASET: string;
   DP_SOKNADSDIALOG_URL: string;
   DP_SOKNAD_ORKESTRATOR_URL: string;
   DP_SOKNAD_ORKESTRATOR_TOKEN: string;

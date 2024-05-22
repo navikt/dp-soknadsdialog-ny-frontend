@@ -1,6 +1,8 @@
 import { PortableText, PortableTextComponentProps } from "@portabletext/react";
 import { TypedObject } from "@portabletext/types";
-import { useSvgIcon } from "~/hooks/useSvgIcon";
+import { Applicant } from "~/components/icons/Applicant";
+import { Bag } from "~/components/icons/Bag";
+import { DirectionSign } from "~/components/icons/DirectionSign";
 import styles from "./Timeline.module.css";
 
 interface ITimelineItem {
@@ -15,25 +17,23 @@ export function Timeline(props: PortableTextComponentProps<{ elements: ITimeline
 }
 
 function TimelineItem(props: ITimelineItem) {
-  const { svg } = useSvgIcon(props.iconName);
-
   function renderSVG() {
-    return (
-      <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
-        <path
-          fill="#23262a"
-          fillRule="evenodd"
-          //@ts-ignore
-          d={svg.props.children.props.d}
-        />
-      </svg>
-    );
+    switch (props.iconName) {
+      case "Applicant":
+        return <Applicant />;
+      case "DirectionSign":
+        return <DirectionSign />;
+      case "Bag":
+        return <Bag />;
+      default:
+        return <Applicant />;
+    }
   }
 
   return (
     <div key={props._key} className={styles.timelineItem}>
       <div className={styles.iconWrapper} aria-hidden>
-        {svg && <span className={styles.icon}>{renderSVG()}</span>}
+        <span className={styles.icon}>{renderSVG()}</span>
       </div>
       <dl>
         <dt className={styles.timeLineItemTitle}>{props.title}</dt>

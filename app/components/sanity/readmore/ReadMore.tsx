@@ -1,6 +1,5 @@
 import { ReadMore as NAVReadMore } from "@navikt/ds-react";
-import { PortableText } from "@portabletext/react";
-import { PortableTextComponentProps } from "@portabletext/react/src/types";
+import { PortableText, PortableTextComponentProps } from "@portabletext/react";
 import { TypedObject } from "@portabletext/types";
 
 export interface IReadMoreProps {
