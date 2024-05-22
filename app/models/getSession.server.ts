@@ -7,11 +7,11 @@ export interface ISessionData {
 }
 
 export async function getSession(req: Request): Promise<INetworkResponse<ISessionData>> {
-  if (getEnv("IS_LOCALHOST") === "true" && getEnv("DP_INNSYN_TOKEN")) {
+  if (getEnv("IS_LOCALHOST") === "true" && getEnv("DP_SOKNAD_ORKESTRATOR_TOKEN")) {
     return {
       status: "success",
       data: {
-        expiresIn: expiresIn(getEnv("DP_INNSYN_TOKEN")),
+        expiresIn: expiresIn(getEnv("DP_SOKNAD_ORKESTRATOR_TOKEN")),
       },
     };
   }

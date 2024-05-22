@@ -16,12 +16,6 @@ export async function getDecoratorHTML(): Promise<DecoratorElements> {
       enforceLogin: false,
       redirectToApp: true,
       level: "Level4",
-      breadcrumbs: [
-        {
-          title: "Søknadsdialog ny frontend",
-          url: "https://www.nav.no/arbeid/dagpenger/soknadsdialog-ny-frontend",
-        },
-      ],
     },
   };
 

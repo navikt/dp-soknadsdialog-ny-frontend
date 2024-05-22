@@ -8,13 +8,10 @@ interface IEnv {
   USE_MSW: string;
   NAIS_CLUSTER_NAME: string;
   IS_LOCALHOST: string;
+  SANITY_DATASET: string;
   DP_SOKNADSDIALOG_URL: string;
-  DP_INNSYN_URL: string;
-  DP_INNSYN_TOKEN: string;
-  OKONOMI_KONTOREGISTER_URL: string;
-  OKONOMI_KONTOREGISTER_TOKEN: string;
-  PAW_ARBEIDSSOEKERREGISTERET_URL: string;
-  PAW_ARBEIDSSOEKERREGISTERET_TOKEN: string;
+  DP_SOKNAD_ORKESTRATOR_URL: string;
+  DP_SOKNAD_ORKESTRATOR_TOKEN: string;
 }
 
 export function getEnv(value: keyof IEnv) {

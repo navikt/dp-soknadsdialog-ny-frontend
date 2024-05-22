@@ -1,10 +1,9 @@
 import { HttpResponse, bypass, http } from "msw";
 import { getEnv } from "~/utils/env.utils";
-import { arbeidssoekerPerioderResponse } from "./responses/arbeidssoekerPerioderResponse";
 
 export const handlers = [
-  http.get(`${getEnv("PAW_ARBEIDSSOEKERREGISTERET_URL")}/api/v1/arbeidssoekerperioder`, () => {
-    return HttpResponse.json(arbeidssoekerPerioderResponse);
+  http.get(`${getEnv("DP_SOKNAD_ORKESTRATOR_URL")}/api/v1/start-soknad`, () => {
+    return HttpResponse.json("a8326661-353e-4e4c-afe9-868ce349e086");
   }),
 
   // Bypassing mocks, use actual data instead
