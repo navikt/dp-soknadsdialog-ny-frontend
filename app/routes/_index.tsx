@@ -46,7 +46,7 @@ export default function Index() {
 
   return (
     <main>
-      <div className="dp-soknadsdialog-ny-frontend">
+      <div className="dp-soknad-frontend">
         <Section>
           <SoknadHeader />
           <SectionContent>

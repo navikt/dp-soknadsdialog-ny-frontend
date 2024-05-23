@@ -17,7 +17,7 @@ jsonConfig="./script/token-generator.config.json"
 # Main script
 init() {
   # Welcome text
-  echo -e "${Cyan}::: ${BPurple}dp-soknadsdialog-ny-frontend token generator ${Cyan}::: \n"
+  echo -e "${Cyan}::: ${BPurple}dp-soknad-frontend token generator ${Cyan}::: \n"
 
   # Check if jq package is installed 
   verifyJQ

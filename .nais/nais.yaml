@@ -1,11 +1,11 @@
 apiVersion: "nais.io/v1alpha1"
 kind: "Application"
 metadata:
-  name: dp-soknadsdialog-ny-frontend
+  name: dp-soknad-frontend
   namespace: teamdagpenger
   labels:
     team: teamdagpenger
-    app: dp-soknadsdialog-ny-frontend
+    app: dp-soknad-frontend
   annotations:
     nginx.ingress.kubernetes.io/proxy-body-size: "64M"
     nginx.ingress.kubernetes.io/proxy-read-timeout: "300"

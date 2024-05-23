@@ -1,5 +1,5 @@
 {
-  "name": "dp-soknadsdialog-ny-frontend",
+  "name": "dp-soknad-frontend",
   "private": true,
   "sideEffects": false,
   "type": "module",

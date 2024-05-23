@@ -115,7 +115,7 @@ export default function App() {
 export function ErrorBoundary() {
   const error = useRouteError();
 
-  console.log("Application error: dp-soknadsdialog-ny-frontend ");
+  console.log("Application error: dp-soknad-frontend ");
   console.log(error);
 
   return (
