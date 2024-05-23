@@ -3,12 +3,12 @@ import { getEnv } from "~/utils/env.utils";
 import { INetworkResponse } from "./networkResponse";
 
 export async function startSoknad(request: Request): Promise<INetworkResponse<string>> {
-  const url = `${getEnv("DP_SOKNAD_ORKESTRATOR_URL")}/api/v1/start-soknad`;
+  const url = `${getEnv("DP_SOKNAD_ORKESTRATOR_URL")}/start-soknad`;
 
   const onBehalfOfToken = await getDPSoknadOrkestratorOboToken(request);
 
   const response = await fetch(url, {
-    method: "GET",
+    method: "POST",
     headers: {
       Authorization: `Bearer ${onBehalfOfToken}`,
     },
