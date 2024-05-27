@@ -11,6 +11,7 @@ import { SoknadHeader } from "~/components/soknad-header/SoknadHeader";
 import { useSanity } from "~/hooks/useSanity";
 import { getSession } from "~/models/getSession.server";
 import { startSoknad } from "~/models/startSokand.server";
+import { getEnv } from "~/utils/env.utils";
 
 export async function action({ request }: ActionFunctionArgs) {
   const formData = await request.formData();
@@ -26,7 +27,7 @@ export async function action({ request }: ActionFunctionArgs) {
     return json({ error: response.error, confirmed: true });
   }
 
-  return redirect(`/uuid?${response.data}`);
+  return redirect(`${getEnv("DP_SOKNADSDIALOG_URL")}/soknad/${response.data}`);
 }
 
 export async function loader({ request }: LoaderFunctionArgs) {
