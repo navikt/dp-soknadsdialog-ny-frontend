@@ -47,7 +47,7 @@ spec:
     - name: DP_SOKNAD_ORKESTRATOR_URL
       value: {{ soknadOrkestrator.ingress }}
     - name: DP_SOKNADSDIALOG_URL
-      value: {{ soknadOrkestrator.ingress }}
+      value: {{ soknadsdialog.ingress }}
   ingresses:
     - {{ ingress }}
   accessPolicy:
