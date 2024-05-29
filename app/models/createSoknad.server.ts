@@ -2,8 +2,11 @@ import { getDPSoknadOrkestratorOboToken } from "~/utils/auth.utils.server";
 import { getEnv } from "~/utils/env.utils";
 import { INetworkResponse } from "./networkResponse";
 
-export async function startSoknad(request: Request): Promise<INetworkResponse<string>> {
-  const url = `${getEnv("DP_SOKNAD_ORKESTRATOR_URL")}/start-soknad`;
+export async function createSoknad(
+  request: Request,
+  uuid: string
+): Promise<INetworkResponse<string>> {
+  const url = `${getEnv("DP_SOKNAD_URL")}/soknad?søknadId=${uuid}`;
 
   const onBehalfOfToken = await getDPSoknadOrkestratorOboToken(request);
 

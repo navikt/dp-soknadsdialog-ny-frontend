@@ -10,6 +10,15 @@ export async function getDPSoknadOrkestratorOboToken(request: Request) {
   return await getOnBehalfOfToken(request, audience);
 }
 
+export async function getDPSoknadOboToken(request: Request) {
+  if (getEnv("IS_LOCALHOST") === "true") {
+    return getEnv("DP_SOKNAD_TOKEN") || "";
+  }
+
+  const audience = `${getEnv("NAIS_CLUSTER_NAME")}:teamdagpenger:dp-soknad`;
+  return await getOnBehalfOfToken(request, audience);
+}
+
 export async function getOnBehalfOfToken(request: Request, audience: string): Promise<string> {
   const token = getToken(request);
   if (!token) {

@@ -9,8 +9,9 @@ import { Section } from "~/components/section/Section";
 import { SectionContent } from "~/components/section/SectionContent";
 import { SoknadHeader } from "~/components/soknad-header/SoknadHeader";
 import { useSanity } from "~/hooks/useSanity";
+import { createSoknad } from "~/models/createSoknad.server";
+import { createUuid } from "~/models/createUuid.server";
 import { getSession } from "~/models/getSession.server";
-import { startSoknad } from "~/models/startSokand.server";
 import { getEnv } from "~/utils/env.utils";
 
 export async function action({ request }: ActionFunctionArgs) {
@@ -21,13 +22,19 @@ export async function action({ request }: ActionFunctionArgs) {
     return json({ confirmed: false });
   }
 
-  const response = await startSoknad(request);
+  const uuidResponse = await createUuid(request);
 
-  if (response.status === "error") {
-    return json({ error: response.error, confirmed: true });
+  if (uuidResponse.status === "error") {
+    return json({ error: uuidResponse.error, confirmed: true });
   }
 
-  return redirect(`${getEnv("DP_SOKNADSDIALOG_URL")}/soknad/${response.data}`);
+  const soknadResponse = await createSoknad(request, uuidResponse.data);
+
+  if (soknadResponse.status === "error") {
+    return json({ error: soknadResponse.error, confirmed: true });
+  }
+
+  return redirect(`${getEnv("DP_SOKNADSDIALOG_URL")}/soknad/${uuidResponse.data}`);
 }
 
 export async function loader({ request }: LoaderFunctionArgs) {

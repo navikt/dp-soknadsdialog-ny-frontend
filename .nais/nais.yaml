@@ -45,9 +45,11 @@ spec:
     - name: DEKORATOR_ENV
       value: {{ dekorator.env }}
     - name: DP_SOKNAD_ORKESTRATOR_URL
-      value: {{ soknadOrkestrator.ingress }}
+      value: {{ dp_soknadOrkestrator_url }}
     - name: DP_SOKNADSDIALOG_URL
-      value: {{ soknadsdialog.ingress }}
+      value: {{ dp_soknadsdialog_url }}
+    - name: DP_SOKNAD_URL
+      value: {{ dp_soknad_url }}
   ingresses:
     - {{ ingress }}
   accessPolicy:
@@ -58,6 +60,7 @@ spec:
         - host: dekoratoren.dev.nav.no
       rules:
        - application: dp-soknad-orkestrator
+       - application: dp-soknad
   idporten:
     enabled: true
     sidecar:

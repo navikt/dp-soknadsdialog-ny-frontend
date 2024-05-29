@@ -12,6 +12,8 @@ interface IEnv {
   DP_SOKNADSDIALOG_URL: string;
   DP_SOKNAD_ORKESTRATOR_URL: string;
   DP_SOKNAD_ORKESTRATOR_TOKEN: string;
+  DP_SOKNAD_URL: string;
+  DP_SOKNAD_TOKEN: string;
 }
 
 export function getEnv(value: keyof IEnv) {
