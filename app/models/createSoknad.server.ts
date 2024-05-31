@@ -26,5 +26,5 @@ export async function createSoknad(
     };
   }
 
-  return { status: "success", data: "Søknad created" };
+  return { status: "success", data: response.statusText };
 }

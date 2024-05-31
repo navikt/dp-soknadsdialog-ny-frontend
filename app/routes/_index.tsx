@@ -1,7 +1,7 @@
 import { Button, ConfirmationPanel } from "@navikt/ds-react";
 import { PortableText } from "@portabletext/react";
 import { ActionFunctionArgs, LoaderFunctionArgs, json } from "@remix-run/node";
-import { Form, redirect, useActionData } from "@remix-run/react";
+import { Form, redirect, useActionData, useNavigation } from "@remix-run/react";
 import { useState } from "react";
 import { ReadMore } from "~/components/sanity/readmore/ReadMore";
 import { Timeline } from "~/components/sanity/timeline/Timeline";
@@ -47,9 +47,12 @@ export async function loader({ request }: LoaderFunctionArgs) {
 
 export default function Index() {
   const actionData = useActionData<typeof action>();
-  const { getInfoPageText, getAppText } = useSanity();
   const [consentGiven, setConsentGiven] = useState(false);
   const [showConsentValidation, setShowConsentValidation] = useState(false);
+
+  const navigations = useNavigation();
+
+  const { getInfoPageText, getAppText } = useSanity();
   const startSideText = getInfoPageText("startside");
 
   return (
@@ -81,7 +84,12 @@ export default function Index() {
                     : undefined
                 }
               />
-              <Button variant="primary" size="medium" type="submit">
+              <Button
+                variant="primary"
+                size="medium"
+                type="submit"
+                loading={Boolean(navigations.formAction)}
+              >
                 {getAppText("start-soknad.knapp.start")}
               </Button>
             </Form>
