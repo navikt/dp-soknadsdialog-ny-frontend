@@ -6,6 +6,10 @@ export const handlers = [
     return HttpResponse.json("a8326661-353e-4e4c-afe9-868ce349e086");
   }),
 
+  http.post(`${getEnv("DP_SOKNAD_URL")}/soknad`, () => {
+    return new HttpResponse(null, { status: 201 });
+  }),
+
   // Bypassing mocks, use actual data instead
   http.get("https://rt6o382n.apicdn.sanity.io/*", async ({ request }) => {
     const bypassResponse = await fetch(bypass(request));
