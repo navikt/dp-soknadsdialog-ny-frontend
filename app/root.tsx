@@ -1,11 +1,11 @@
 import navStyles from "@navikt/ds-css/dist/index.css?url";
 import { LinksFunction, MetaFunction, json } from "@remix-run/node";
-import { Links, Meta, Outlet, Scripts, ScrollRestoration, useLoaderData } from "@remix-run/react";
+import { Links, Meta, Outlet, Scripts, ScrollRestoration } from "@remix-run/react";
 import { createClient } from "@sanity/client";
 import parse from "html-react-parser";
-import { Fragment, Suspense } from "react";
 import { getDecoratorHTML } from "./decorator/decorator.server";
 import { useInjectDecoratorScript } from "./hooks/useInjectDecoratorScript";
+import { useTypedRouteLoaderData } from "./hooks/useTypedRouteLoaderData";
 import indexStyle from "./index.css?url";
 import { sanityConfig } from "./sanity/sanity.config";
 import { allTextsQuery } from "./sanity/sanity.query";
@@ -67,7 +67,7 @@ export async function loader() {
 }
 
 export function Layout({ children }: { children: React.ReactNode }) {
-  const { decoratorFragments, env } = useLoaderData<typeof loader>();
+  const { decoratorFragments, env } = useTypedRouteLoaderData("root");
 
   useInjectDecoratorScript(decoratorFragments.DECORATOR_SCRIPTS);
 
@@ -86,7 +86,6 @@ export function Layout({ children }: { children: React.ReactNode }) {
         <ScrollRestoration />
         {parse(decoratorFragments.DECORATOR_FOOTER, { trim: true })}
         <Scripts />
-        <Suspense fallback={<Fragment />}>{parse(decoratorFragments?.DECORATOR_SCRIPTS)}</Suspense>
         <script
           dangerouslySetInnerHTML={{
             __html: `window.env = ${JSON.stringify(env)}`,
