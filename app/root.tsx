@@ -1,20 +1,11 @@
-/* eslint-disable */
-import favicon16 from "/favicon-16x16.png";
-import favicon32 from "/favicon-32x32.png";
-import favicon from "/favicon.ico";
-/* eslint-enable */
-
 import navStyles from "@navikt/ds-css/dist/index.css?url";
-import { BodyShort, Skeleton } from "@navikt/ds-react";
 import { LinksFunction, MetaFunction, json } from "@remix-run/node";
-import { Links, Meta, Outlet, Scripts, ScrollRestoration, useRouteError } from "@remix-run/react";
+import { Links, Meta, Outlet, Scripts, ScrollRestoration, useLoaderData } from "@remix-run/react";
 import { createClient } from "@sanity/client";
 import parse from "html-react-parser";
 import { Fragment, Suspense } from "react";
-import { Section } from "./components/section/Section";
-import { SectionContent } from "./components/section/SectionContent";
 import { getDecoratorHTML } from "./decorator/decorator.server";
-import { useTypedRouteLoaderData } from "./hooks/useTypedRouteLoaderData";
+import { useInjectDecoratorScript } from "./hooks/useInjectDecoratorScript";
 import indexStyle from "./index.css?url";
 import { sanityConfig } from "./sanity/sanity.config";
 import { allTextsQuery } from "./sanity/sanity.query";
@@ -23,24 +14,24 @@ import { ISanity } from "./sanity/sanity.types";
 export const sanityClient = createClient(sanityConfig);
 
 export const links: LinksFunction = () => [
-  { rel: "stylesheet", href: indexStyle },
   { rel: "stylesheet", href: navStyles },
+  { rel: "stylesheet", href: indexStyle },
   {
     rel: "icon",
     type: "image/png",
     sizes: "32x32",
-    href: favicon32,
+    href: "favicon-32x32.png",
   },
   {
     rel: "icon",
     type: "image/png",
     sizes: "16x16",
-    href: favicon16,
+    href: "favicon-16x16.png",
   },
   {
     rel: "icon",
     type: "image/x-icon",
-    href: favicon,
+    href: "favicon.ico",
   },
 ];
 
@@ -76,26 +67,24 @@ export async function loader() {
 }
 
 export function Layout({ children }: { children: React.ReactNode }) {
-  const { decoratorFragments, env } = useTypedRouteLoaderData("root");
+  const { decoratorFragments, env } = useLoaderData<typeof loader>();
+
+  useInjectDecoratorScript(decoratorFragments.DECORATOR_SCRIPTS);
 
   return (
     <html lang="nb">
       <head>
         <meta charSet="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <Suspense fallback={<Fragment />}>{parse(decoratorFragments?.DECORATOR_STYLES)}</Suspense>
+        {parse(decoratorFragments.DECORATOR_STYLES, { trim: true })}
         <Meta />
         <Links />
       </head>
       <body>
-        <Suspense fallback={<Skeleton variant="text" width="100%" height={300} />}>
-          {parse(decoratorFragments?.DECORATOR_HEADER)}
-        </Suspense>
+        {parse(decoratorFragments.DECORATOR_HEADER, { trim: true })}
         {children}
         <ScrollRestoration />
-        <Suspense fallback={<Skeleton variant="text" width="100%" height={300} />}>
-          {parse(decoratorFragments?.DECORATOR_FOOTER)}
-        </Suspense>
+        {parse(decoratorFragments.DECORATOR_FOOTER, { trim: true })}
         <Scripts />
         <Suspense fallback={<Fragment />}>{parse(decoratorFragments?.DECORATOR_SCRIPTS)}</Suspense>
         <script
@@ -110,32 +99,4 @@ export function Layout({ children }: { children: React.ReactNode }) {
 
 export default function App() {
   return <Outlet />;
-}
-
-export function ErrorBoundary() {
-  const error = useRouteError();
-
-  console.log("Application error: dp-soknad-frontend ");
-  console.log(error);
-
-  return (
-    <html lang="nb">
-      <head>
-        <meta charSet="utf-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <Meta />
-        <Links />
-      </head>
-      <body>
-        <main>
-          <Section>
-            <SectionContent>
-              <BodyShort>Vi har tekniske problemer akkurat nå. Prøve igjen om litt.</BodyShort>
-            </SectionContent>
-          </Section>
-          <Scripts />
-        </main>
-      </body>
-    </html>
-  );
 }

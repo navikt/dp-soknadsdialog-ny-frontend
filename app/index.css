@@ -1,13 +1,12 @@
 :root {
-  --app-max-width: 900px;
+  --app-max-width: 680px;
+  --app-padding: var(--a-spacing-4);
 }
 
 .dp-soknad-frontend {
-  margin-bottom: var(--a-spacing-16);
-}
-
-.page-header {
-  margin-bottom: var(--a-spacing-6);
+  margin: 0 auto var(--a-spacing-16);
+  padding: var(--app-padding);
+  max-width: var(--app-max-width);
 }
 
 .modal-container {
