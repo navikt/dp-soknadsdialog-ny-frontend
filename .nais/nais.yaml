@@ -50,8 +50,10 @@ spec:
       value: {{ dp_soknadsdialog_url }}
     - name: DP_SOKNAD_URL
       value: {{ dp_soknad_url }}
-  ingresses:
-    - {{ ingress }}
+   ingresses:
+    {{#each ingresses as |url|}}
+    - {{url}}
+    {{/each}}
   accessPolicy:
     outbound:
       external:

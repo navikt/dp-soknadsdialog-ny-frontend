@@ -37,14 +37,10 @@ export const links: LinksFunction = () => [
 
 export const meta: MetaFunction = () => {
   return [
-    { title: "Ny dagpenger søknad frontend" },
+    { title: "Søknad om dagpenger - Start søknad" },
     {
       property: "og:title",
-      content: "Very cool app",
-    },
-    {
-      name: "description",
-      content: "This app is the best",
+      content: "Søknad om dagpenger - Start søknad",
     },
   ];
 };

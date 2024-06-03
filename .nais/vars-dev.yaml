@@ -1,5 +1,7 @@
-ingress: https://arbeid.intern.dev.nav.no/arbeid/dagpenger/dp-soknad-frontend
-base_path: /arbeid/dagpenger/dp-soknad-frontend
+ingresses: 
+  - https://arbeid.intern.dev.nav.no/dagpenger/brukerdialog/soknad
+  - https://arbeid.intern.dev.nav.no/dagpenger/brukerdialog/soknad
+base_path: /arbeid/dagpenger/brukerdialog/soknad
 dekorator:
   url: https://dekoratoren.dev.nav.no
   env: dev
