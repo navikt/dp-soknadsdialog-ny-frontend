@@ -1,6 +1,6 @@
 ingresses: 
   - https://arbeid.intern.dev.nav.no/dagpenger/brukerdialog/soknad
-  - https://arbeid.intern.dev.nav.no/dagpenger/brukerdialog/soknad
+  - https://arbeid.ansatt.dev.nav.no/dagpenger/brukerdialog/soknad
 base_path: /arbeid/dagpenger/brukerdialog/soknad
 dekorator:
   url: https://dekoratoren.dev.nav.no
