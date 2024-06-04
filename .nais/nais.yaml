@@ -51,9 +51,9 @@ spec:
     - name: DP_SOKNAD_URL
       value: {{ dp_soknad_url }}
     ingresses:
-    {{#each ingresses as |url|}}
-    - {{url}}
-    {{/each}}
+      {{#each ingresses as |url|}}
+      - {{url}}
+      {{/each}}
   accessPolicy:
     outbound:
       external:
