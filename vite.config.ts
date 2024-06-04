@@ -6,6 +6,6 @@ import tsconfigPaths from "vite-tsconfig-paths";
 installGlobals();
 
 export default defineConfig({
-  base: "/dagpenger/brukerdialog/soknad",
-  plugins: [remix({ basename: "/dagpenger/brukerdialog/soknad" }), tsconfigPaths()],
+  base: "/dagpenger/brukerdialog/soknad/",
+  plugins: [remix({ basename: "/dagpenger/brukerdialog/soknad/" }), tsconfigPaths()],
 });
