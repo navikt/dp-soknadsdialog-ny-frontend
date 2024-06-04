@@ -26,9 +26,9 @@ spec:
     path: "{{ base_path }}/api/internal/isready"
     enabled: true
   replicas:
-    min: 1
-    max: 2
-    cpuThresholdPercentage: 75
+    min: 2
+    max: 4
+    cpuThresholdPercentage: 80
   resources:
     limits:
       memory: 512Mi
@@ -52,7 +52,7 @@ spec:
       value: {{ dp_soknad_url }}
   ingresses:
     {{#each ingresses as |url|}}
-    - {{url}}
+    - {{ url }}
     {{/each}}
   accessPolicy:
     outbound:
