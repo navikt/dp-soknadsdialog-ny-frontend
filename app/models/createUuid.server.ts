@@ -26,5 +26,7 @@ export async function createUuid(request: Request): Promise<INetworkResponse<str
 
   const data: string = await response.json();
 
+  console.log(`🔥 soknad uuid `, data);
+
   return { status: "success", data };
 }

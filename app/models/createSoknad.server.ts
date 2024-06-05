@@ -26,5 +26,7 @@ export async function createSoknad(
     };
   }
 
+  console.log(`🔥 soknad soknad `);
+
   return { status: "success", data: response.statusText };
 }
