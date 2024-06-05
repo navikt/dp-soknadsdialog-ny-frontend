@@ -54,10 +54,11 @@ spec:
       external:
         - host: rt6o382n.apicdn.sanity.io
         - host: www.nav.no
-        - host: dekoratoren.dev.nav.no
       rules:
        - application: dp-soknad-orkestrator
        - application: dp-soknad
+       - application: nav-dekoratoren
+         namespace: personbruker
   idporten:
     enabled: true
     sidecar:
