@@ -35,14 +35,11 @@ export async function action({ request }: ActionFunctionArgs) {
     return json({ error: uuidResponse.error, confirmed: true });
   }
 
-  console.log(`🔥 lager soknad med uuid: `, uuidResponse.data);
   const soknadResponse = await createSoknad(request, uuidResponse.data);
 
   if (soknadResponse.status === "error") {
     return json({ error: soknadResponse.error, confirmed: true });
   }
-
-  console.log(`🔥 soknadResponse data:`, soknadResponse.data);
 
   return redirect(`${getEnv("DP_SOKNADSDIALOG_URL")}/soknad/${uuidResponse.data}`);
 }
