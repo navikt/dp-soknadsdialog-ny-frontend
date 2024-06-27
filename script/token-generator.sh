@@ -26,7 +26,7 @@ init() {
   startTokenGenerator
 
   # Finished
-  sleep 1
+  sleep 0.5
   echo -e "🌈 ${Purple}You're good to go! Restart your dev-server."
 }
 
