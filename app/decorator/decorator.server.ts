@@ -16,6 +16,7 @@ export async function getDecoratorHTML(): Promise<DecoratorElements> {
       chatbot: false,
       enforceLogin: false,
       redirectToApp: true,
+      logoutWarning: true,
       level: "Level4",
     },
   };

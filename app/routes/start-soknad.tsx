@@ -8,8 +8,8 @@ import { Timeline } from "~/components/sanity/timeline/Timeline";
 import { SoknadHeader } from "~/components/soknad-header/SoknadHeader";
 import { useSanity } from "~/hooks/useSanity";
 import { useSetFocus } from "~/hooks/useSetFocus";
-import { createSoknad } from "~/models/createSoknad.server";
-import { createUuid } from "~/models/createUuid.server";
+import { dpSoknadCreateSoknad } from "~/models/dp-soknad/dpSoknadCreateSoknad.server";
+import { startSoknad } from "~/models/startSoknad.server";
 import { getSession } from "~/models/getSession.server";
 import { getEnv } from "~/utils/env.utils";
 
@@ -29,19 +29,22 @@ export async function action({ request }: ActionFunctionArgs) {
     return json({ confirmed: false });
   }
 
-  const uuidResponse = await createUuid(request);
+  const startSoknadResponse = await startSoknad(request);
 
-  if (uuidResponse.status === "error") {
-    return json({ error: uuidResponse.error, confirmed: true });
+  if (startSoknadResponse.status === "error") {
+    return json({ error: startSoknadResponse.error, confirmed: true });
   }
 
-  const soknadResponse = await createSoknad(request, uuidResponse.data);
+  const dpSoknadCreateSoknadResponse = await dpSoknadCreateSoknad(
+    request,
+    startSoknadResponse.data
+  );
 
-  if (soknadResponse.status === "error") {
-    return json({ error: soknadResponse.error, confirmed: true });
+  if (dpSoknadCreateSoknadResponse.status === "error") {
+    return json({ error: dpSoknadCreateSoknadResponse.error, confirmed: true });
   }
 
-  return redirect(`${getEnv("DP_SOKNADSDIALOG_URL")}/soknad/${uuidResponse.data}`);
+  return redirect(`${getEnv("DP_SOKNADSDIALOG_URL")}/soknad/${startSoknadResponse.data}`);
 }
 
 export default function Index() {

@@ -2,7 +2,7 @@ import { HttpResponse, bypass, http } from "msw";
 import { getEnv } from "~/utils/env.utils";
 
 export const handlers = [
-  http.post(`${getEnv("DP_SOKNAD_ORKESTRATOR_URL")}/start-soknad`, () => {
+  http.post(`${getEnv("DP_SOKNAD_ORKESTRATOR_URL")}/soknad/start`, () => {
     return HttpResponse.json("a8326661-353e-4e4c-afe9-868ce349e086");
   }),
 
