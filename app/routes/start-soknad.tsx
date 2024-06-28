@@ -10,16 +10,6 @@ import { useSanity } from "~/hooks/useSanity";
 import { useSetFocus } from "~/hooks/useSetFocus";
 import { dpSoknadCreateSoknad } from "~/models/dp-soknad/dpSoknadCreateSoknad.server";
 import { startSoknad } from "~/models/startSoknad.server";
-import { getSession } from "~/models/getSession.server";
-import { getEnv } from "~/utils/env.utils";
-
-export async function loader({ request }: LoaderFunctionArgs) {
-  const session = await getSession(request);
-
-  return json({
-    session,
-  });
-}
 
 export async function action({ request }: ActionFunctionArgs) {
   const formData = await request.formData();
@@ -35,16 +25,15 @@ export async function action({ request }: ActionFunctionArgs) {
     return json({ error: startSoknadResponse.error, confirmed: true });
   }
 
-  const dpSoknadCreateSoknadResponse = await dpSoknadCreateSoknad(
-    request,
-    startSoknadResponse.data
-  );
+  const soknadId = startSoknadResponse.data.soknadId;
+
+  const dpSoknadCreateSoknadResponse = await dpSoknadCreateSoknad(request, soknadId);
 
   if (dpSoknadCreateSoknadResponse.status === "error") {
     return json({ error: dpSoknadCreateSoknadResponse.error, confirmed: true });
   }
 
-  return redirect(`${getEnv("DP_SOKNADSDIALOG_URL")}/soknad/${startSoknadResponse.data}`);
+  return redirect(`/${soknadId}`);
 }
 
 export default function Index() {

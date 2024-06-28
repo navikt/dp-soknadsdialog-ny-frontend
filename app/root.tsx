@@ -1,5 +1,5 @@
 import navStyles from "@navikt/ds-css/dist/index.css?url";
-import { LinksFunction, MetaFunction, json } from "@remix-run/node";
+import { LinksFunction, LoaderFunctionArgs, MetaFunction, json } from "@remix-run/node";
 import { Links, Meta, Outlet, Scripts, ScrollRestoration } from "@remix-run/react";
 import { createClient } from "@sanity/client";
 import parse from "html-react-parser";
@@ -10,6 +10,7 @@ import indexStyle from "./index.css?url";
 import { sanityConfig } from "./sanity/sanity.config";
 import { allTextsQuery } from "./sanity/sanity.query";
 import { ISanity } from "./sanity/sanity.types";
+import { getSession } from "./models/getSession.server";
 
 export const sanityClient = createClient(sanityConfig);
 
@@ -45,7 +46,7 @@ export const meta: MetaFunction = () => {
   ];
 };
 
-export async function loader() {
+export async function loader({ request }: LoaderFunctionArgs) {
   const decoratorFragments = await getDecoratorHTML();
 
   const sanityTexts = await sanityClient.fetch<ISanity>(allTextsQuery, {
@@ -53,9 +54,12 @@ export async function loader() {
     lang: "nb",
   });
 
+  const session = await getSession(request);
+
   return json({
     decoratorFragments,
     sanityTexts,
+    session,
     env: {},
   });
 }

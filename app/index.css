@@ -46,3 +46,7 @@
 .mb-10 {
   margin-bottom: var(--a-spacing-10);
 }
+
+.my-10 {
+  margin: var(--a-spacing-10) 0;
+}

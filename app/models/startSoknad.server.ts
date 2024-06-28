@@ -2,7 +2,11 @@ import { getDPSoknadOrkestratorOboToken } from "~/utils/auth.utils.server";
 import { getEnv } from "~/utils/env.utils";
 import { INetworkResponse } from "./networkResponse";
 
-export async function startSoknad(request: Request): Promise<INetworkResponse<string>> {
+interface IStartSoknad {
+  soknadId: string;
+}
+
+export async function startSoknad(request: Request): Promise<INetworkResponse<IStartSoknad>> {
   const url = `${getEnv("DP_SOKNAD_ORKESTRATOR_URL")}/soknad/start`;
 
   const onBehalfOfToken = await getDPSoknadOrkestratorOboToken(request);
@@ -24,7 +28,7 @@ export async function startSoknad(request: Request): Promise<INetworkResponse<st
     };
   }
 
-  const data: string = await response.json();
+  const soknadId: string = await response.json();
 
-  return { status: "success", data };
+  return { status: "success", data: { soknadId } };
 }

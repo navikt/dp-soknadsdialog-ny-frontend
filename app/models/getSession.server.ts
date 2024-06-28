@@ -7,11 +7,25 @@ export interface ISessionData {
 }
 
 export async function getSession(req: Request): Promise<INetworkResponse<ISessionData>> {
-  if (getEnv("IS_LOCALHOST") === "true" && getEnv("DP_SOKNAD_ORKESTRATOR_TOKEN")) {
+  const devToken = getEnv("DP_SOKNAD_ORKESTRATOR_TOKEN");
+
+  if (getEnv("IS_LOCALHOST") === "true" && devToken) {
+    if (expiresIn(devToken) <= 0) {
+      console.log("🟡 Lokalt sessjon utløpt! Kjør: npm run generate-token på nytt.");
+
+      return {
+        status: "error",
+        error: {
+          statusCode: 401,
+          statusText: "Expired token",
+        },
+      };
+    }
+
     return {
       status: "success",
       data: {
-        expiresIn: expiresIn(getEnv("DP_SOKNAD_ORKESTRATOR_TOKEN")),
+        expiresIn: expiresIn(devToken),
       },
     };
   }

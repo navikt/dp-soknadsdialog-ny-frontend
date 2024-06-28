@@ -1,10 +1,10 @@
 import { useRouteLoaderData } from "@remix-run/react";
 import type { loader as rootLoader } from "~/root";
-import type { loader as startSoknadLoader } from "~/routes/start-soknad";
+import type { loader as soknadId } from "~/routes/$soknadId";
 
 type Loaders = {
   root: typeof rootLoader;
-  "routes/start-soknad": typeof startSoknadLoader;
+  "routes/$soknadId": typeof soknadId;
 };
 
 export function useTypedRouteLoaderData<T extends keyof Loaders>(route: T) {
