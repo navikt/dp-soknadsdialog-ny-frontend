@@ -1,5 +1,5 @@
 import { DatePicker, useDatepicker } from "@navikt/ds-react";
-import { ISpørsmal } from "~/models/getNesteSporsmal.server";
+import { ISpørsmal } from "~/types/sporsmal";
 
 export function PeriodeSporsmal(props: ISpørsmal) {
   const { tekstnøkkel } = props;

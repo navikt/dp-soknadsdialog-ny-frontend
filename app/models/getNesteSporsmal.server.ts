@@ -1,25 +1,7 @@
 import { getDPSoknadOrkestratorOboToken } from "~/utils/auth.utils.server";
 import { getEnv } from "~/utils/env.utils";
 import { INetworkResponse } from "./networkResponse";
-
-export interface ISpørsmal {
-  id: string;
-  tekstnøkkel: string;
-  type: SpørsmålTypes;
-  /* eslint-disable */
-  svar: any;
-  gyldigeSvar: any;
-  /* eslint-enable */
-}
-
-export type SpørsmålTypes = "LAND" | "PERIODE" | "DATO" | "TEKST" | "BOOLEAN";
-
-export interface ISpørsmålGruppe {
-  id: string;
-  navn: string;
-  nesteSpørsmål: ISpørsmal;
-  besvarteSpørsmål: ISpørsmal[];
-}
+import { ISpørsmålGruppe } from "~/types/sporsmal";
 
 export async function getNesteSporsmal(
   request: Request,

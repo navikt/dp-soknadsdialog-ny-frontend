@@ -1,5 +1,5 @@
 import { Radio, RadioGroup } from "@navikt/ds-react";
-import { ISpørsmal } from "~/models/getNesteSporsmal.server";
+import { ISpørsmal } from "~/types/sporsmal";
 
 export function BooleanSporsmal(props: ISpørsmal) {
   const { tekstnøkkel, svar } = props;

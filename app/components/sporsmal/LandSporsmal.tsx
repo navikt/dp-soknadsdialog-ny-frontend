@@ -1,5 +1,5 @@
 import { Select } from "@navikt/ds-react";
-import { ISpørsmal } from "~/models/getNesteSporsmal.server";
+import { ISpørsmal } from "~/types/sporsmal";
 
 export function LandSporsmal(props: ISpørsmal) {
   const { tekstnøkkel } = props;

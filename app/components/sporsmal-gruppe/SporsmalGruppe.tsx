@@ -1,10 +1,10 @@
 import { Alert } from "@navikt/ds-react";
-import { ISpørsmal, ISpørsmålGruppe } from "~/models/getNesteSporsmal.server";
 import { BooleanSporsmal } from "../sporsmal/BooleanSporsmal";
 import { DatoSporsmal } from "../sporsmal/DatoSporsmal";
 import { LandSporsmal } from "../sporsmal/LandSporsmal";
 import { PeriodeSporsmal } from "../sporsmal/PeriodeSporsmal";
 import { TekstSporsmal } from "../sporsmal/TekstSporsmal";
+import { ISpørsmal, ISpørsmålGruppe } from "~/types/sporsmal";
 
 export function SporsmalGruppe(props: ISpørsmålGruppe) {
   const { navn, nesteSpørsmål, besvarteSpørsmål } = props;
@@ -56,7 +56,7 @@ export function SporsmalGruppe(props: ISpørsmålGruppe) {
   return (
     <div>
       <h2>{navn}</h2>
-      {besvarteSpørsmål.map((spørsmål) => {
+      {besvarteSpørsmål.map((spørsmål: ISpørsmal) => {
         return (
           <div key={spørsmål.id} className="my-10">
             {renderBesvarteSpørsmal(spørsmål)}
