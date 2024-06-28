@@ -11,7 +11,7 @@ export async function getSession(req: Request): Promise<INetworkResponse<ISessio
 
   if (getEnv("IS_LOCALHOST") === "true" && devToken) {
     if (expiresIn(devToken) <= 0) {
-      console.log("🟡 Lokalt sessjon utløpt! Kjør: npm run generate-token på nytt.");
+      console.log("\n ⛔️ Lokalt sessjon utløpt! Kjør: npm run generate-token på nytt.");
 
       return {
         status: "error",
