@@ -9,20 +9,20 @@ import { TekstSporsmal } from "../sporsmal/TekstSporsmal";
 export function SporsmalGruppe(props: ISpørsmålGruppe) {
   const { navn, nesteSpørsmål, besvarteSpørsmål } = props;
 
-  function renderSporsmal(nesteSpørsmål: ISpørsmal) {
-    if (!nesteSpørsmål) return null;
+  function renderSporsmal(spørsmål: ISpørsmal) {
+    if (!spørsmål) return null;
 
-    switch (nesteSpørsmål.type) {
+    switch (spørsmål.type) {
       case "TEKST":
-        return <TekstSporsmal {...nesteSpørsmål} />;
+        return <TekstSporsmal {...spørsmål} />;
       case "BOOLEAN":
-        return <BooleanSporsmal {...nesteSpørsmål} />;
+        return <BooleanSporsmal {...spørsmål} />;
       case "LAND":
-        return <LandSporsmal {...nesteSpørsmål} />;
+        return <LandSporsmal {...spørsmål} />;
       case "DATO":
-        return <DatoSporsmal {...nesteSpørsmål} />;
+        return <DatoSporsmal {...spørsmål} />;
       case "PERIODE":
-        return <PeriodeSporsmal {...nesteSpørsmål} />;
+        return <PeriodeSporsmal {...spørsmål} />;
       default:
         return (
           <Alert variant="error">
