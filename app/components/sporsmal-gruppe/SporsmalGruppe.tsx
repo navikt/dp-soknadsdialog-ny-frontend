@@ -1,10 +1,10 @@
 import { Alert } from "@navikt/ds-react";
 import { ISpørsmal, ISpørsmålGruppe } from "~/models/getNesteSporsmal.server";
-import { BooleanSporsmal } from "./BooleanSporsmal";
-import { DatoSporsmal } from "./DatoSporsmal";
-import { LandSporsmal } from "./LandSporsmal";
-import { PeriodeSporsmal } from "./PeriodeSporsmal";
-import { TekstSporsmal } from "./TekstSporsmal";
+import { BooleanSporsmal } from "../sporsmal/BooleanSporsmal";
+import { DatoSporsmal } from "../sporsmal/DatoSporsmal";
+import { LandSporsmal } from "../sporsmal/LandSporsmal";
+import { PeriodeSporsmal } from "../sporsmal/PeriodeSporsmal";
+import { TekstSporsmal } from "../sporsmal/TekstSporsmal";
 
 interface IProps {
   props: ISpørsmålGruppe;

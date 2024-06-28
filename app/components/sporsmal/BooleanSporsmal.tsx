@@ -6,7 +6,7 @@ interface IProps {
 }
 
 export function BooleanSporsmal({ props }: IProps) {
-  const { tekstnøkkel, svar, gyldigeSvar } = props;
+  const { tekstnøkkel, svar } = props;
 
   const handleChange = (val: string) => console.log(val);
 
