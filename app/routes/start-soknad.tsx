@@ -1,56 +1,27 @@
 import { Button, ConfirmationPanel } from "@navikt/ds-react";
 import { PortableText } from "@portabletext/react";
-import { ActionFunctionArgs } from "@remix-run/node";
-import { Form, redirect, useActionData, useNavigation } from "@remix-run/react";
+import { useFetcher } from "@remix-run/react";
 import { useEffect, useRef, useState } from "react";
-import { typedjson } from "remix-typedjson";
 import { ReadMore } from "~/components/sanity-aksel-components/readmore/ReadMore";
 import { Timeline } from "~/components/sanity-aksel-components/timeline/Timeline";
 import { SoknadHeader } from "~/components/soknad-header/SoknadHeader";
 import { useSanity } from "~/hooks/useSanity";
 import { useSetFocus } from "~/hooks/useSetFocus";
-import { dpSoknadCreateSoknad } from "~/models/dp-soknad/dpSoknadCreateSoknad.server";
-import { startSoknad } from "~/models/startSoknad.server";
-
-export async function action({ request }: ActionFunctionArgs) {
-  const formData = await request.formData();
-  const confirmationPanel = formData.get("confirmationPanel");
-
-  if (!confirmationPanel) {
-    return typedjson({ confirmed: false });
-  }
-
-  const startSoknadResponse = await startSoknad(request);
-
-  if (startSoknadResponse.status === "error") {
-    return typedjson({ error: startSoknadResponse.error, confirmed: true });
-  }
-
-  const soknadId = startSoknadResponse.data.soknadId;
-
-  const dpSoknadCreateSoknadResponse = await dpSoknadCreateSoknad(request, soknadId);
-
-  if (dpSoknadCreateSoknadResponse.status === "error") {
-    return typedjson({ error: dpSoknadCreateSoknadResponse.error, confirmed: true });
-  }
-
-  return redirect(`/${soknadId}`);
-}
 
 export default function Index() {
-  const actionData = useActionData<typeof action>();
+  const startSoknad = useFetcher();
   const [consentGiven, setConsentGiven] = useState(false);
   const missingConsentRef = useRef<HTMLInputElement>(null);
+
   const { setFocus } = useSetFocus();
-  const navigation = useNavigation();
   const { getInfoPageText, getAppText } = useSanity();
   const startSideText = getInfoPageText("startside");
 
   useEffect(() => {
-    if (actionData && !actionData.confirmed) {
+    if (startSoknad.data) {
       setFocus(missingConsentRef);
     }
-  }, [actionData, setFocus]);
+  }, [startSoknad.data, setFocus]);
 
   return (
     <main>
@@ -62,7 +33,7 @@ export default function Index() {
             components={{ types: { timeline: Timeline, readMore: ReadMore } }}
           />
         )}
-        <Form method="post">
+        <startSoknad.Form method="post" action="/action/start-soknad">
           <ConfirmationPanel
             ref={missingConsentRef}
             name="confirmationPanel"
@@ -73,7 +44,7 @@ export default function Index() {
               setConsentGiven(!consentGiven);
             }}
             error={
-              !consentGiven && actionData && !actionData.confirmed
+              !consentGiven && startSoknad.data
                 ? getAppText("start-soknad.checkbox.samtykke-innhenting-data.validering-tekst")
                 : undefined
             }
@@ -82,11 +53,11 @@ export default function Index() {
             variant="primary"
             size="medium"
             type="submit"
-            loading={navigation.state === "submitting"}
+            loading={startSoknad.state !== "idle"}
           >
             {getAppText("start-soknad.knapp.start")}
           </Button>
-        </Form>
+        </startSoknad.Form>
       </div>
     </main>
   );
