@@ -1,12 +1,16 @@
-import { DatePicker } from "@navikt/ds-react";
+import { DatePicker, useDatepicker } from "@navikt/ds-react";
+import { ISpørsmal } from "~/models/getNesteSporsmal.server";
 
-export function DatoSporsmal() {
-  return (
-    <DatePicker.Standalone
-      onSelect={console.log}
-      dropdownCaption
-      fromDate={new Date("1 Oct 2020")}
-      toDate={new Date("1 Oct 2024")}
-    />
-  );
+interface IProps {
+  props: ISpørsmal;
+}
+
+export function DatoSporsmal({ props }: IProps) {
+  const { tekstnøkkel } = props;
+
+  const { inputProps } = useDatepicker({
+    fromDate: new Date(),
+  });
+
+  return <DatePicker.Input {...inputProps} label={tekstnøkkel} />;
 }

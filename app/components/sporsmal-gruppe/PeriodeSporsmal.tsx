@@ -1,5 +1,16 @@
-import { DatePicker } from "@navikt/ds-react";
+import { DatePicker, useDatepicker } from "@navikt/ds-react";
+import { ISpørsmal } from "~/models/getNesteSporsmal.server";
 
-export function PeriodeSporsmal() {
-  return <DatePicker.Standalone mode="range" onSelect={console.log} />;
+interface IProps {
+  props: ISpørsmal;
+}
+
+export function PeriodeSporsmal({ props }: IProps) {
+  const { tekstnøkkel } = props;
+
+  const { inputProps } = useDatepicker({
+    fromDate: new Date(),
+  });
+
+  return <DatePicker.Input {...inputProps} label={tekstnøkkel} />;
 }

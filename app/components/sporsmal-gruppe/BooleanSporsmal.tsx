@@ -1,13 +1,19 @@
 import { Radio, RadioGroup } from "@navikt/ds-react";
+import { ISpørsmal } from "~/models/getNesteSporsmal.server";
 
-export function BooleanSporsmal() {
+interface IProps {
+  props: ISpørsmal;
+}
+
+export function BooleanSporsmal({ props }: IProps) {
+  const { tekstnøkkel, svar, gyldigeSvar } = props;
+
   const handleChange = (val: string) => console.log(val);
 
   return (
-    <RadioGroup legend="Velg din aldersgruppe." onChange={handleChange}>
-      <Radio value="10">10-20 år</Radio>
-      <Radio value="20">21-45 år</Radio>
-      <Radio value="40">46-80 år</Radio>
+    <RadioGroup legend={tekstnøkkel} onChange={handleChange} defaultValue={svar}>
+      <Radio value="10">Ja</Radio>
+      <Radio value="40">Nei</Radio>
     </RadioGroup>
   );
 }

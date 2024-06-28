@@ -1,8 +1,8 @@
 import { LoaderFunctionArgs, json } from "@remix-run/node";
+import { useLoaderData } from "@remix-run/react";
 import invariant from "tiny-invariant";
 import { SoknadHeader } from "~/components/soknad-header/SoknadHeader";
-import { SporsmalGruppeNy } from "~/components/sporsmal-gruppe/SporsmalGruppeNy";
-import { useTypedRouteLoaderData } from "~/hooks/useTypedRouteLoaderData";
+import { SporsmalGruppe } from "~/components/sporsmal-gruppe/SporsmalGruppe";
 import { ISpørsmålGruppe, getNesteSporsmal } from "~/models/getNesteSporsmal.server";
 
 export async function loader({ params, request }: LoaderFunctionArgs) {
@@ -14,18 +14,19 @@ export async function loader({ params, request }: LoaderFunctionArgs) {
     throw new Response("Error");
   }
 
-  const sporsmalGruppe: ISpørsmålGruppe = nesteSporsmal.data;
-  return json({ sporsmalGruppe });
+  return json({ sporsmalGruppe: nesteSporsmal.data });
 }
 
 export default function SoknadIdPage() {
-  const { sporsmalGruppe } = useTypedRouteLoaderData("routes/$soknadId");
+  const { sporsmalGruppe } = useLoaderData<typeof loader>();
+
+  console.log(`🔥 sporsmalGruppe :`, sporsmalGruppe);
 
   return (
     <main>
       <div className="dp-soknad-frontend">
         <SoknadHeader />
-        <SporsmalGruppeNy {...(sporsmalGruppe as ISpørsmålGruppe)} />
+        <SporsmalGruppe props={sporsmalGruppe as ISpørsmålGruppe} />
       </div>
     </main>
   );

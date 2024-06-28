@@ -6,8 +6,8 @@ export interface ISpørsmal {
   id: string;
   tekstnøkkel: string;
   type: SpørsmålTypes;
-  svar: [];
-  gyldigeSvar: [];
+  svar: any;
+  gyldigeSvar: any;
 }
 
 export type SpørsmålTypes = "LAND" | "PERIODE" | "DATO" | "TEKST" | "BOOLEAN";
