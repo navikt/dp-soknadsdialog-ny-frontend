@@ -1,11 +1,7 @@
 import { DatePicker, useDatepicker } from "@navikt/ds-react";
 import { ISpørsmal } from "~/models/getNesteSporsmal.server";
 
-interface IProps {
-  props: ISpørsmal;
-}
-
-export function DatoSporsmal({ props }: IProps) {
+export function DatoSporsmal(props: ISpørsmal) {
   const { tekstnøkkel } = props;
 
   const { inputProps } = useDatepicker({

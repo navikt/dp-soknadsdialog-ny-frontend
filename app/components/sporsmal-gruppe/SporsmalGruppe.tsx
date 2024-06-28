@@ -6,25 +6,21 @@ import { LandSporsmal } from "../sporsmal/LandSporsmal";
 import { PeriodeSporsmal } from "../sporsmal/PeriodeSporsmal";
 import { TekstSporsmal } from "../sporsmal/TekstSporsmal";
 
-interface IProps {
-  props: ISpørsmålGruppe;
-}
-
-export function SporsmalGruppe({ props }: IProps) {
+export function SporsmalGruppe(props: ISpørsmålGruppe) {
   const { navn, nesteSpørsmål, besvarteSpørsmål } = props;
 
   function renderBesvarteSpørsmal(spørsmal: ISpørsmal) {
     switch (spørsmal.type) {
       case "TEKST":
-        return <TekstSporsmal props={spørsmal} />;
+        return <TekstSporsmal {...spørsmal} />;
       case "BOOLEAN":
-        return <BooleanSporsmal props={spørsmal} />;
+        return <BooleanSporsmal {...spørsmal} />;
       case "LAND":
-        return <LandSporsmal props={spørsmal} />;
+        return <LandSporsmal {...spørsmal} />;
       case "DATO":
-        return <DatoSporsmal props={spørsmal} />;
+        return <DatoSporsmal {...spørsmal} />;
       case "PERIODE":
-        return <PeriodeSporsmal props={spørsmal} />;
+        return <PeriodeSporsmal {...spørsmal} />;
       default:
         return (
           <Alert variant="error">
@@ -39,15 +35,15 @@ export function SporsmalGruppe({ props }: IProps) {
 
     switch (nesteSpørsmål.type) {
       case "TEKST":
-        return <TekstSporsmal props={nesteSpørsmål} />;
+        return <TekstSporsmal {...nesteSpørsmål} />;
       case "BOOLEAN":
-        return <BooleanSporsmal props={nesteSpørsmål} />;
+        return <BooleanSporsmal {...nesteSpørsmål} />;
       case "LAND":
-        return <LandSporsmal props={nesteSpørsmål} />;
+        return <LandSporsmal {...nesteSpørsmål} />;
       case "DATO":
-        return <DatoSporsmal props={nesteSpørsmål} />;
+        return <DatoSporsmal {...nesteSpørsmål} />;
       case "PERIODE":
-        return <PeriodeSporsmal props={nesteSpørsmål} />;
+        return <PeriodeSporsmal {...nesteSpørsmål} />;
       default:
         return (
           <Alert variant="error">

@@ -1,5 +1,5 @@
+import { useTypedRouteLoaderData } from "remix-typedjson";
 import { ISanityAppText, ISanityInfoside } from "~/sanity/sanity.types";
-import { useTypedRouteLoaderData } from "./useTypedRouteLoaderData";
 
 export function useSanity() {
   const { sanityTexts } = useTypedRouteLoaderData("root");
@@ -12,7 +12,7 @@ export function useSanity() {
   }
 
   function getInfoPageText(slug: string): ISanityInfoside | undefined {
-    return sanityTexts?.infoPage.find((side) => {
+    return sanityTexts?.infoPage.find((side: ISanityInfoside) => {
       return side.slug === slug;
     });
   }

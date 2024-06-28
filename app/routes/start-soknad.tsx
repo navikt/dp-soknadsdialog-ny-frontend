@@ -1,8 +1,9 @@
 import { Button, ConfirmationPanel } from "@navikt/ds-react";
 import { PortableText } from "@portabletext/react";
-import { ActionFunctionArgs, LoaderFunctionArgs, json } from "@remix-run/node";
+import { ActionFunctionArgs } from "@remix-run/node";
 import { Form, redirect, useActionData, useNavigation } from "@remix-run/react";
 import { useEffect, useRef, useState } from "react";
+import { typedjson } from "remix-typedjson";
 import { ReadMore } from "~/components/sanity/readmore/ReadMore";
 import { Timeline } from "~/components/sanity/timeline/Timeline";
 import { SoknadHeader } from "~/components/soknad-header/SoknadHeader";
@@ -16,13 +17,13 @@ export async function action({ request }: ActionFunctionArgs) {
   const confirmationPanel = formData.get("confirmationPanel");
 
   if (!confirmationPanel) {
-    return json({ confirmed: false });
+    return typedjson({ confirmed: false });
   }
 
   const startSoknadResponse = await startSoknad(request);
 
   if (startSoknadResponse.status === "error") {
-    return json({ error: startSoknadResponse.error, confirmed: true });
+    return typedjson({ error: startSoknadResponse.error, confirmed: true });
   }
 
   const soknadId = startSoknadResponse.data.soknadId;
@@ -30,7 +31,7 @@ export async function action({ request }: ActionFunctionArgs) {
   const dpSoknadCreateSoknadResponse = await dpSoknadCreateSoknad(request, soknadId);
 
   if (dpSoknadCreateSoknadResponse.status === "error") {
-    return json({ error: dpSoknadCreateSoknadResponse.error, confirmed: true });
+    return typedjson({ error: dpSoknadCreateSoknadResponse.error, confirmed: true });
   }
 
   return redirect(`/${soknadId}`);

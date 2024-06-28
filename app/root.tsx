@@ -1,16 +1,16 @@
 import navStyles from "@navikt/ds-css/dist/index.css?url";
-import { LinksFunction, LoaderFunctionArgs, MetaFunction, json } from "@remix-run/node";
+import { LinksFunction, LoaderFunctionArgs, MetaFunction } from "@remix-run/node";
 import { Links, Meta, Outlet, Scripts, ScrollRestoration } from "@remix-run/react";
 import { createClient } from "@sanity/client";
 import parse from "html-react-parser";
+import { typedjson, useTypedRouteLoaderData } from "remix-typedjson";
 import { getDecoratorHTML } from "./decorator/decorator.server";
 import { useInjectDecoratorScript } from "./hooks/useInjectDecoratorScript";
-import { useTypedRouteLoaderData } from "./hooks/useTypedRouteLoaderData";
 import indexStyle from "./index.css?url";
+import { getSession } from "./models/getSession.server";
 import { sanityConfig } from "./sanity/sanity.config";
 import { allTextsQuery } from "./sanity/sanity.query";
 import { ISanity } from "./sanity/sanity.types";
-import { getSession } from "./models/getSession.server";
 
 export const sanityClient = createClient(sanityConfig);
 
@@ -56,7 +56,7 @@ export async function loader({ request }: LoaderFunctionArgs) {
 
   const session = await getSession(request);
 
-  return json({
+  return typedjson({
     decoratorFragments,
     sanityTexts,
     session,
